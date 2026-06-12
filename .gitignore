@@ -1,0 +1,19 @@
+# Node
+agent_mgmt_app/node_modules/
+agent_mgmt_app/dist/
+
+# Python
+agent_mgmt_api/__pycache__/
+agent_mgmt_api/*.pyc
+agent_mgmt_api/.venv/
+agent_mgmt_api/venv/
+
+# Env & secrets
+.env
+.env.*
+*.pem
+*.key
+
+# OS
+.DS_Store
+Thumbs.db
