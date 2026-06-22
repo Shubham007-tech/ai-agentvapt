@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: agent-mgmt-app
+spec:
+  selector:
+    matchLabels:
+      app: agent-mgmt-app
+  template:
+    metadata:
+      labels:
+        app: agent-mgmt-app
+    spec:
+      containers:
+        - name: agent-mgmt-app
+          image: agent-mgmt-app:latest      # overridden by each overlay via kustomize
+          ports:
+            - containerPort: 80
+          env:
+            - name: API_BASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: agent-mgmt-secrets
+                  key: API_BASE_URL
+          readinessProbe:
+            httpGet:
+              path: /vapt_iaura_services/
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
